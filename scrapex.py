@@ -1,20 +1,14 @@
+import praw
 import pandas as pd
-from tqdm.notebook import tqdm
-from ntscraper import Nitter
 
-scraper = Nitter()
+reddit = praw.Reddit(user_agent = True, client_id = "id", 
+                     client_secret = "key", username = 'username',
+                     password = 'password')
 
-tweets = scraper.get_tweets('Drake', mode = 'hashtag', number = 5)
+url = "https://www.reddit.com/r/rap/comments/1cyaukk/if_we_compared_every_rapper_to_a_nba_player_who/"
+post = reddit.submission(url=url)
 
-final_tweets = []
-for tweet in tweets['tweets']:
-    data = [tweet['link'], tweet['text'], tweet['date']]
-    final_tweets.append(data)
+print(post.selftext)
 
-df = pd.DataFrame(final_tweets, columns =['link', 'text', 'date'])
-
-
-
-
-
-
+for comment in post.comments:
+    print(comment.body)
