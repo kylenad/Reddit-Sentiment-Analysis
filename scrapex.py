@@ -1,14 +1,19 @@
 import praw
 import pandas as pd
+import datetime
 
 reddit = praw.Reddit(user_agent = True, client_id = "id", 
-                     client_secret = "key", username = 'username',
+                     client_secret = "key", username = 'user',
                      password = 'password')
 
-url = "https://www.reddit.com/r/rap/comments/1cyaukk/if_we_compared_every_rapper_to_a_nba_player_who/"
-post = reddit.submission(url=url)
+subreddit = reddit.subreddit('rap')
+for post in subreddit.top(limit=10):
+    print("Link:", post.url)
+    print("Title:", post.title)
+    print("Selftext:", post.selftext)
+    print(f"Date:", datetime.datetime.fromtimestamp(post.created_utc))
+    print("-----------------------------------------")
 
-print(post.selftext)
 
-for comment in post.comments:
-    print(comment.body)
+
+ 
