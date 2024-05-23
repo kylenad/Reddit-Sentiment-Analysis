@@ -1,14 +1,27 @@
 import praw
 import pandas as pd
+import datetime
 
 reddit = praw.Reddit(user_agent = True, client_id = "id", 
                      client_secret = "key", username = 'username',
                      password = 'password')
 
-url = "https://www.reddit.com/r/rap/comments/1cyaukk/if_we_compared_every_rapper_to_a_nba_player_who/"
-post = reddit.submission(url=url)
+subreddit = reddit.subreddit('rap')
+final_data = []
+for post in subreddit.new(limit=1000):
+    data = [post.url, post.title, 
+            post.selftext, 
+            datetime.datetime.fromtimestamp(post.created_utc)]
+    
+    final_data.append(data)
 
-print(post.selftext)
 
-for comment in post.comments:
-    print(comment.body)
+df = pd.DataFrame(final_data)
+
+df.to_csv("redditData", index = False)
+
+   
+
+
+
+ 
