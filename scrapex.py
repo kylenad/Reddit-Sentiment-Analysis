@@ -3,7 +3,7 @@ import pandas as pd
 import datetime
 
 reddit = praw.Reddit(user_agent = True, client_id = "id", 
-                     client_secret = "key", username = 'username',
+                     client_secret = "key", username = 'user',
                      password = 'password')
 
 subreddit = reddit.subreddit('rap')
