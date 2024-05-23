@@ -19,7 +19,6 @@ for post in subreddit.new(limit=1000):
 df = pd.DataFrame(final_data)
 
 df.to_csv("redditData", index = False)
-
    
 
 
