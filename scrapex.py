@@ -3,7 +3,7 @@ import pandas as pd
 import datetime
 
 reddit = praw.Reddit(user_agent = True, client_id = "id", 
-                     client_secret = "key", username = 'user',
+                     client_secret = "", username = '',
                      password = 'password')
 
 subreddit = reddit.subreddit('rap')
@@ -19,6 +19,7 @@ for post in subreddit.new(limit=1000):
 df = pd.DataFrame(final_data)
 
 df.to_csv("redditData", index = False)
+
    
 
 
